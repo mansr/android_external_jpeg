@@ -172,7 +172,7 @@ start_pass (j_decompress_ptr cinfo)
 	 */
 	ISLOW_MULT_TYPE * ismtbl = (ISLOW_MULT_TYPE *) compptr->dct_table;
 	for (i = 0; i < DCTSIZE2; i++) {
-	  ismtbl[i] = (ISLOW_MULT_TYPE) qtbl->quantval[i];
+	  ismtbl[i] = (ISLOW_MULT_TYPE) qtbl->quantval[i] << 4;
 	}
       }
       break;

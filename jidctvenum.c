@@ -54,33 +54,10 @@ jpeg_idct_islow (j_decompress_ptr cinfo, jpeg_component_info * compptr,
          JCOEFPTR coef_block,
          JSAMPARRAY output_buf, JDIMENSION output_col)
 {
-  ISLOW_MULT_TYPE * quantptr;
-  JCOEFPTR coefptr;
-  int ctr;
-
-  coefptr  = coef_block;
-  quantptr = (ISLOW_MULT_TYPE *) compptr->dct_table;
-
-  /* Dequantize the coeff buffer and write it back to the same location */
-  for (ctr = DCTSIZE; ctr > 0; ctr--) {
-    coefptr[0]         = DEQUANTIZE(coefptr[0]        , quantptr[0]        );
-    coefptr[DCTSIZE*1] = DEQUANTIZE(coefptr[DCTSIZE*1], quantptr[DCTSIZE*1]);
-    coefptr[DCTSIZE*2] = DEQUANTIZE(coefptr[DCTSIZE*2], quantptr[DCTSIZE*2]);
-    coefptr[DCTSIZE*3] = DEQUANTIZE(coefptr[DCTSIZE*3], quantptr[DCTSIZE*3]);
-    coefptr[DCTSIZE*4] = DEQUANTIZE(coefptr[DCTSIZE*4], quantptr[DCTSIZE*4]);
-    coefptr[DCTSIZE*5] = DEQUANTIZE(coefptr[DCTSIZE*5], quantptr[DCTSIZE*5]);
-    coefptr[DCTSIZE*6] = DEQUANTIZE(coefptr[DCTSIZE*6], quantptr[DCTSIZE*6]);
-    coefptr[DCTSIZE*7] = DEQUANTIZE(coefptr[DCTSIZE*7], quantptr[DCTSIZE*7]);
-
-    /* advance pointers to next column */
-    quantptr++;
-    coefptr++;
-  }
-
   idct_8x8_venum(coef_block,
                  output_buf,
-                 DCTSIZE * sizeof(INT16),
-                 output_col);
+                 output_col,
+                 compptr->dct_table);
 }
 
 GLOBAL(void)

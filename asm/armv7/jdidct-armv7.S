@@ -126,27 +126,26 @@
         @==================================================================
         @ Load input input data from memory and shift
         @==================================================================
+        vld1.16   {q5-q6}, [r3]!
         vld1.16   {d16, d17},[r0]!     @q8 =row0
-        vqshl.s16  q8,  q8,  #4        @Input data too big?!!
-                                       @Maximum MPEG input is 2047/-2048.
+        vmul.s16   q8,  q8,  q5
         vld1.16   {d18, d19},[r0]!     @q9 =row1
-        vqshl.s16  q9,  q9,  #4        @Shift 1 instead of 4
-
+        vmul.s16   q9,  q9,  q6
+        vld1.16   {q5-q6}, [r3]!
         vld1.16   {d20, d21},[r0]!     @q10=row2
-        vqshl.s16  q10, q10, #4
-
+        vmul.s16   q10, q10, q5
         vld1.16   {d22, d23},[r0]!     @q11=row3
-        vqshl.s16  q11, q11, #4
-
+        vmul.s16   q11, q11, q6
+        vld1.16   {q5-q6}, [r3]!
         vld1.16   {d24, d25},[r0]!     @q12=row4
-        vqshl.s16  q12, q12, #4
-
+        vmul.s16   q12, q12, q5
         vld1.16   {d26, d27},[r0]!     @q13=row5
-        vqshl.s16  q13, q13, #4
+        vmul.s16   q13, q13, q6
+        vld1.16   {q5-q6}, [r3]!
         vld1.16   {d28, d29},[r0]!     @q14=row6
-        vqshl.s16  q14, q14, #4
+        vmul.s16   q14, q14, q5
         vld1.16   {d30, d31},[r0]!     @q15=row7
-        vqshl.s16  q15, q15, #4
+        vmul.s16   q15, q15, q6
 
         @==================================================================
         @ refresh the constants that was clobbered last time through IDCT1D
@@ -231,28 +230,28 @@
         vqshrun.s16 d23, q15, #6
 
         ldr       r12, [r1], #4
-        add       r12, r12, r3
+        add       r12, r12, r2
         vst1.8    {d16}, [r12]
         ldr       r12, [r1], #4
-        add       r12, r12, r3
+        add       r12, r12, r2
         vst1.8    {d17}, [r12]
         ldr       r12, [r1], #4
-        add       r12, r12, r3
+        add       r12, r12, r2
         vst1.8    {d18}, [r12]
         ldr       r12, [r1], #4
-        add       r12, r12, r3
+        add       r12, r12, r2
         vst1.8    {d19}, [r12]
         ldr       r12, [r1], #4
-        add       r12, r12, r3
+        add       r12, r12, r2
         vst1.8    {d20}, [r12]
         ldr       r12, [r1], #4
-        add       r12, r12, r3
+        add       r12, r12, r2
         vst1.8    {d21}, [r12]
         ldr       r12, [r1], #4
-        add       r12, r12, r3
+        add       r12, r12, r2
         vst1.8    {d22}, [r12]
         ldr       r12, [r1], #4
-        add       r12, r12, r3
+        add       r12, r12, r2
         vst1.8    {d23}, [r12]
     .endm
 
