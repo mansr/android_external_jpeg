@@ -231,28 +231,28 @@
 
         ldr       r12, [r1], #4
         add       r12, r12, r2
-        vst1.8    {d16}, [r12]
+        vst1.8    {d16}, [r12,:64]
         ldr       r12, [r1], #4
         add       r12, r12, r2
-        vst1.8    {d17}, [r12]
+        vst1.8    {d17}, [r12,:64]
         ldr       r12, [r1], #4
         add       r12, r12, r2
-        vst1.8    {d18}, [r12]
+        vst1.8    {d18}, [r12,:64]
         ldr       r12, [r1], #4
         add       r12, r12, r2
-        vst1.8    {d19}, [r12]
+        vst1.8    {d19}, [r12,:64]
         ldr       r12, [r1], #4
         add       r12, r12, r2
-        vst1.8    {d20}, [r12]
+        vst1.8    {d20}, [r12,:64]
         ldr       r12, [r1], #4
         add       r12, r12, r2
-        vst1.8    {d21}, [r12]
+        vst1.8    {d21}, [r12,:64]
         ldr       r12, [r1], #4
         add       r12, r12, r2
-        vst1.8    {d22}, [r12]
+        vst1.8    {d22}, [r12,:64]
         ldr       r12, [r1], #4
         add       r12, r12, r2
-        vst1.8    {d23}, [r12]
+        vst1.8    {d23}, [r12,:64]
     .endm
 
     .macro BIG_BODY_TRANSPOSE_INPUT
